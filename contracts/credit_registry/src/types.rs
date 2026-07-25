@@ -85,6 +85,8 @@ pub struct AuditLogEntry {
 #[derive(Clone)]
 #[contracttype]
 pub enum DataKey {
+    /// Contract schema version, used by migrate() to run sequential upgrades.
+    Version,
     Admin,
     VerifierSet,
     Credit(BytesN<32>),

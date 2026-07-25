@@ -8,6 +8,14 @@ pub const MIN_TTL: u32 = 6_307_200;
 /// Threshold below which TTL is extended (half of MIN_TTL).
 pub const TTL_THRESHOLD: u32 = MIN_TTL / 2;
 
+pub fn set_version(env: &Env, version: u32) {
+    env.storage().instance().set(&DataKey::Version, &version);
+}
+
+pub fn get_version(env: &Env) -> u32 {
+    env.storage().instance().get(&DataKey::Version).unwrap_or(0)
+}
+
 pub fn set_admin(env: &Env, admin: &Address) {
     env.storage().instance().set(&DataKey::Admin, admin);
 }

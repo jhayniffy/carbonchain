@@ -22,6 +22,7 @@ pub const MIN_CREDIT_UNIT: i128 = 100_000;
 
 pub mod errors;
 pub mod events;
+pub mod migrations;
 pub mod storage;
 #[cfg(feature = "testutils")]
 pub mod test_helpers;
@@ -86,6 +87,7 @@ impl CreditRegistry {
         set_admin(&env, &admin);
         set_retirement_contract(&env, &retirement_contract);
         set_required_approvals(&env, required_approvals);
+        crate::storage::set_version(&env, crate::migrations::CURRENT_VERSION);
         ContractInitialized {
             admin: admin.clone(),
             retirement_contract: retirement_contract.clone(),
